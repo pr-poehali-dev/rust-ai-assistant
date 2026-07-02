@@ -66,10 +66,10 @@ def handler(event: dict, context) -> dict:
     messages.append({'role': 'user', 'content': user_message})
 
     payload = json.dumps({
-        'model': 'mistral-large-latest',
+        'model': 'mistral-small-latest',
         'messages': messages,
         'temperature': 0.5,
-        'max_tokens': 800,
+        'max_tokens': 700,
     }).encode('utf-8')
 
     req = urllib.request.Request(
@@ -83,14 +83,31 @@ def handler(event: dict, context) -> dict:
     )
 
     try:
-        with urllib.request.urlopen(req, timeout=25) as resp:
+        with urllib.request.urlopen(req, timeout=50) as resp:
             result = json.loads(resp.read().decode('utf-8'))
         reply = result['choices'][0]['message']['content']
     except urllib.error.HTTPError as e:
+        detail = ''
+        try:
+            detail = e.read().decode('utf-8')[:300]
+        except Exception:
+            pass
         return {
-            'statusCode': 502,
+            'statusCode': 200,
             'headers': {**cors_headers, 'Content-Type': 'application/json'},
-            'body': json.dumps({'error': f'Mistral API error: {e.code}'}),
+            'body': json.dumps(
+                {'reply': f'Mistral отклонил запрос (код {e.code}). {detail}'},
+                ensure_ascii=False,
+            ),
+        }
+    except Exception:
+        return {
+            'statusCode': 200,
+            'headers': {**cors_headers, 'Content-Type': 'application/json'},
+            'body': json.dumps(
+                {'reply': 'Сервер ИИ долго не отвечает. Попробуй задать вопрос ещё раз.'},
+                ensure_ascii=False,
+            ),
         }
 
     return {
