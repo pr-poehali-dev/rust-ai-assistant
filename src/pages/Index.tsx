@@ -1,19 +1,22 @@
 import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 
+const ICON_BASE =
+  'https://raw.githubusercontent.com/LehaSex/rust-game-icons/main/large';
+
 const FLOATING_ITEMS = [
-  { emoji: '🔫', top: '12%', left: '8%', size: 'text-6xl', delay: '0s', r: '-15deg' },
-  { emoji: '🪓', top: '22%', left: '85%', size: 'text-5xl', delay: '1.2s', r: '20deg' },
-  { emoji: '🛡️', top: '68%', left: '6%', size: 'text-5xl', delay: '0.6s', r: '-8deg' },
-  { emoji: '💣', top: '78%', left: '82%', size: 'text-6xl', delay: '2s', r: '12deg' },
-  { emoji: '⛏️', top: '40%', left: '92%', size: 'text-4xl', delay: '1.8s', r: '-25deg' },
-  { emoji: '🪵', top: '85%', left: '40%', size: 'text-4xl', delay: '0.3s', r: '10deg' },
-  { emoji: '🔩', top: '15%', left: '55%', size: 'text-3xl', delay: '2.4s', r: '0deg' },
-  { emoji: '🏹', top: '55%', left: '78%', size: 'text-5xl', delay: '1s', r: '-18deg' },
-  { emoji: '🧱', top: '32%', left: '15%', size: 'text-4xl', delay: '1.5s', r: '6deg' },
-  { emoji: '⚙️', top: '62%', left: '48%', size: 'text-3xl', delay: '0.9s', r: '0deg' },
-  { emoji: '🥫', top: '10%', left: '30%', size: 'text-3xl', delay: '2.7s', r: '-12deg' },
-  { emoji: '🔦', top: '48%', left: '4%', size: 'text-4xl', delay: '0.4s', r: '22deg' },
+  { icon: `${ICON_BASE}/weapons/rifle.ak.png`, top: '11%', left: '7%', size: 'w-24', delay: '0s', r: '-15deg' },
+  { icon: `${ICON_BASE}/tools/axe.salvaged.png`, top: '20%', left: '84%', size: 'w-20', delay: '1.2s', r: '20deg' },
+  { icon: `${ICON_BASE}/weapons/pistol.revolver.png`, top: '67%', left: '5%', size: 'w-20', delay: '0.6s', r: '-8deg' },
+  { icon: `${ICON_BASE}/explosives/explosive.timed.png`, top: '76%', left: '81%', size: 'w-24', delay: '2s', r: '12deg' },
+  { icon: `${ICON_BASE}/tools/pickaxe.png`, top: '39%', left: '90%', size: 'w-16', delay: '1.8s', r: '-25deg' },
+  { icon: `${ICON_BASE}/resources/wood.png`, top: '84%', left: '39%', size: 'w-16', delay: '0.3s', r: '10deg' },
+  { icon: `${ICON_BASE}/resources/metal.fragments.png`, top: '14%', left: '54%', size: 'w-14', delay: '2.4s', r: '0deg' },
+  { icon: `${ICON_BASE}/weapons/bow.hunting.png`, top: '54%', left: '77%', size: 'w-20', delay: '1s', r: '-18deg' },
+  { icon: `${ICON_BASE}/resources/stones.png`, top: '31%', left: '14%', size: 'w-16', delay: '1.5s', r: '6deg' },
+  { icon: `${ICON_BASE}/resources/sulfur.png`, top: '61%', left: '47%', size: 'w-14', delay: '0.9s', r: '0deg' },
+  { icon: `${ICON_BASE}/medical/bandage.png`, top: '9%', left: '29%', size: 'w-12', delay: '2.7s', r: '-12deg' },
+  { icon: `${ICON_BASE}/weapons/rifle.bolt.png`, top: '47%', left: '3%', size: 'w-24', delay: '0.4s', r: '22deg' },
 ];
 
 const Index = () => {
@@ -40,11 +43,11 @@ const Index = () => {
         <div className="absolute left-0 h-32 w-full animate-scan bg-gradient-to-b from-transparent via-white/20 to-transparent" />
       </div>
 
-      {/* Плавающие предметы из Rust */}
+      {/* Плавающие текстуры предметов из Rust */}
       {FLOATING_ITEMS.map((item, i) => (
         <div
           key={i}
-          className={`pointer-events-none absolute animate-float select-none ${item.size} drop-shadow-lg`}
+          className="pointer-events-none absolute animate-float select-none"
           style={
             {
               top: item.top,
@@ -54,7 +57,12 @@ const Index = () => {
             } as React.CSSProperties
           }
         >
-          {item.emoji}
+          <img
+            src={item.icon}
+            alt=""
+            draggable={false}
+            className={`${item.size} opacity-90 [filter:sepia(0.35)_saturate(1.25)_contrast(1.05)_drop-shadow(0_8px_12px_rgba(0,0,0,0.45))]`}
+          />
         </div>
       ))}
 
