@@ -23,30 +23,15 @@ const FLOATING_ITEMS = [
 
 type Msg = { role: 'user' | 'assistant'; content: string };
 
+const HELI_TEXTURE = 'https://rustlabs.com/img/items180/scraptransportheli.png';
+
 const HelicopterAvatar = ({ className = '' }: { className?: string }) => (
-  <svg viewBox="0 0 64 64" className={className} fill="none">
-    {/* задняя балка */}
-    <rect x="30" y="30" width="26" height="4" rx="1" fill="#e8e3dc" />
-    {/* хвостовой стабилизатор */}
-    <path d="M54 26 L60 24 L60 34 L54 34 Z" fill="#cd412b" />
-    {/* хвостовой винт */}
-    <rect x="57" y="20" width="2" height="18" rx="1" fill="#0d0d0d" />
-    {/* корпус кабины */}
-    <path d="M6 28 Q4 20 16 19 L34 19 Q40 19 40 28 L40 38 Q40 40 36 40 L10 40 Q6 40 6 36 Z" fill="#cd412b" />
-    {/* стекло кабины */}
-    <path d="M10 28 Q9 23 16 22 L24 22 L24 30 L10 30 Z" fill="#8fd0e8" opacity="0.9" />
-    {/* пушка снизу */}
-    <rect x="12" y="40" width="10" height="3" rx="1" fill="#0d0d0d" />
-    <rect x="6" y="41" width="8" height="2" rx="1" fill="#0d0d0d" />
-    {/* полозья шасси */}
-    <rect x="8" y="46" width="30" height="2" rx="1" fill="#e8e3dc" />
-    <rect x="12" y="40" width="2" height="6" fill="#e8e3dc" />
-    <rect x="30" y="40" width="2" height="6" fill="#e8e3dc" />
-    {/* мачта винта */}
-    <rect x="21" y="12" width="3" height="8" rx="1" fill="#0d0d0d" />
-    {/* главный винт */}
-    <rect x="2" y="11" width="42" height="3" rx="1.5" fill="#0d0d0d" />
-  </svg>
+  <img
+    src={HELI_TEXTURE}
+    alt="Стрекоза — транспортный вертолёт из Rust"
+    draggable={false}
+    className={`${className} object-contain [filter:drop-shadow(0_2px_4px_rgba(0,0,0,0.5))]`}
+  />
 );
 
 const Index = () => {
