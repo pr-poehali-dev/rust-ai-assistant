@@ -1,0 +1,26 @@
+{
+  "tests": [
+    {
+      "name": "CORS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Empty message returns 400",
+      "method": "POST",
+      "path": "/",
+      "body": {"message": ""},
+      "expectedStatus": 400
+    },
+    {
+      "name": "Ask about Rust",
+      "method": "POST",
+      "path": "/",
+      "body": {"message": "Как скрафтить деревянную стену?"},
+      "expectedStatus": 200,
+      "expectedBody": {"reply": "string"},
+      "bodyMatcher": "partial"
+    }
+  ]
+}
